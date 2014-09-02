@@ -14,7 +14,13 @@ CHIP Mux {
     PARTS:
     // Put your code here:
     //my code
-    Nand( a=a, b=sel, out=w1 );
-    Nand( a=w1, b=
+    Not( in=sel, out=notsel );
+    And( a=a, b=notsel, out=p1 );
+    And( a=b, b=sel, out=p2 );
+    Or( a=p1, b=p2, out=out );
+    
+    
     
 }
+
+
