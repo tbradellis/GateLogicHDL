@@ -10,20 +10,23 @@
  */
 
 
-CHIP DMux {
-    IN in, sel;
-    OUT a, b;
-
-    PARTS:
-    // Put your code here: 
-    //DMux(in= ,sel= ,a= ,b= ); 
-    Not( sel=a, out=b )
-    And( in=b, sel=nota, out=out);
-    And( in=a, sel=notb, out=out);
-    
-
      
+CHIP Dmux {
 
+IN in, sel;
+OUT a, b;
+
+PARTS:
+
+//First we flip the selector bit for future use.
+Not(in=sel, out=notsel);
+//Second, we check if the input and selector are both true.
+//If they are, then output pin b becomes true.
+And(a=in, b=sel, out=b);
+//Lastly we check if both a and not the selector are true.
+//If they are both true, then output pin a becomes true.
+And(a=in, b=notsel, out=a);
+}
 
 
 
